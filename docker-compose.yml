@@ -1,0 +1,56 @@
+version: '3'
+services:
+  selenium-hub:
+    image: selenium/hub
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"
+  chrome:
+    container_name: 'chrome'
+    image: selenium/node-chrome-debug
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
+    ports:
+      - "5900:5900"
+
+#  https-portal:
+#    container_name: 'https-portal'
+#    image: steveltn/https-portal:1
+#    ports:
+#      - '80:80'
+#      - '443:443'
+#    environment:
+#      DOMAINS: 'example.com -> http://django:8080'
+#      STAGE: 'local' # or 'production'
+#    # volumes:
+#    #   - /data/ssl_certs:/var/lib/https-portal
+
+  db:
+    container_name: 'db'
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: maria_db
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - ./db:/var/lib/mysql:Z
+    ports:
+      - 3306:3306
+
+  django:
+    container_name: 'django'
+    build: ./django-uwsgi-nginx
+    working_dir: /code/source_capture/
+    volumes:
+      - ./django-uwsgi-nginx/source_capture:/code/source_capture:Z
+    ports:
+      - '8080:8080'
+    depends_on: 
+      - db
+    links:
+      - selenium-hub:hub
