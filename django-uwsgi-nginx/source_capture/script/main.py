@@ -2,25 +2,6 @@ from selenium import webdriver
 from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.common.keys import Keys
 
-#
-# import mysql.connector
-# from mysql.connector import errorcode
-# try:
-#     cnx = mysql.connector.connect(user='root', password='root',
-#                                   database='django3',
-#                                   host='localhost',
-#                                   port='8889',
-#                                   unix_socket='/Applications/MAMP/tmp/mysql/mysql.sock',
-#     )
-# except mysql.connector.Error as err:
-#     if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-#         print("Something is wrong with your user name or password")
-#     elif err.errno == errorcode.ER_BAD_DB_ERROR:
-#         print("Database does not exists")
-#     else:
-#         print(err)
-# else:
-#     cnx.close()
 
 if __name__ == '__main__':
 
@@ -36,4 +17,4 @@ if __name__ == '__main__':
     print("show title")
     print(driver.title)
 
-    driver.close()
+    driver.quit()
