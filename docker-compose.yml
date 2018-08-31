@@ -7,7 +7,7 @@ services:
       - "4444:4444"
   chrome:
     container_name: 'chrome'
-    image: selenium/node-chrome-debug
+    image: selenium/node-chrome-debug:3.14.0
     depends_on:
       - selenium-hub
     environment:
