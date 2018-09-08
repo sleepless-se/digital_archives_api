@@ -76,6 +76,7 @@ COPY . /code/
 
 
 ENV PYTHONPATH /usr/bin/python3
+ENV PYTHONPATH /code/source_capture
 
 # install django, normally you would remove this step because your project would already
 # be installed in the code/source_capture/ directory
