@@ -2,7 +2,10 @@
 
 ## start
 
-```docker-compose up -d```
+```
+docker network create my_network
+docker-compose up -d
+```
 
 ## save url
 
